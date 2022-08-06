@@ -1,3 +1,4 @@
+import { AuthenticationError } from "apollo-server";
 import { JwtPayload } from "jsonwebtoken";
 import Post from "../../models/Post";
 import checkAuth from "../../Utils/checkAuth";
@@ -38,6 +39,21 @@ const PostResolver = {
       const post = await newPost.save();
       return post;
     },
+    async deletePost(parent, { postId }, context) {
+      const user = checkAuth(context) as JwtPayload;
+
+      try {
+        const post = await Post.findById(postId);
+        if (user.username === post.username) {
+          await post.delete();
+          return "Post deleted Successfully";
+        } else {
+          throw new AuthenticationError("Action not Allowed");
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    }
   },
 };
 
