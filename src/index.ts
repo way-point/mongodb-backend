@@ -1,26 +1,11 @@
 import { gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
+import * as mongoose from "mongoose";
 
-const { ApolloServer, PubSub } = require("apollo-server");
-const mongoose = require("mongoose");
-
-// const typeDefs = require('./graphql/typeDefs');
-// const resolvers = require('./graphql/resolvers');
-
+import Post from "../models/Post"
 import { MONGO_URL } from "../config";
-
-const typeDefs = gql`
-  type Query {
-    sayHi: String!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    sayHi: () => {
-      return "Hello World";
-    },
-  },
-};
+import typeDefs from "../graphql/TypeDefs";
+import resolvers from "../graphql/Resolvers";
 
 const PORT = process.env.port || 3000;
 
@@ -30,7 +15,7 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect(MONGO_URL, { useNewUrlParser: true })
+  .connect(MONGO_URL)
   .then(() => {
     console.log('MongoDB Connected');
     return server.listen({ port: PORT });

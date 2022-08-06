@@ -6,7 +6,8 @@
     "outDir": "lib",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2017"
+    "target": "es2017",
+    "watch": false
   },
   "compileOnSave": true,
   "include": ["src"]
