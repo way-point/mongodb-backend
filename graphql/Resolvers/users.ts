@@ -18,7 +18,11 @@ const generateToken = (user) => {
 const UserResolver = {
   Mutation: {
     login: async (parent, { loginInput: { username, password } }, context, info) => {
-      const { errors } = validateLoginInput({username, password});
+      const { valid, errors } = validateLoginInput({username, password});
+
+      if (!valid) {
+        throw new UserInputError("Errors", { errors });
+      }
 
       const user = await User.findOne({
         username

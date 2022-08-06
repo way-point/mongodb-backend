@@ -7,6 +7,7 @@ const Resolver = {
   },
   Mutation: {
     ...UserResolvers.Mutation,
+    ...PostResolvers.Mutation,
   },
 };
 
