@@ -47,9 +47,10 @@ const typeDefs = gql`
     getPost(postId:ID!): Post
   }
   type Mutation {
-    register(registerInput:RegisterInput): User!
-    login(loginInput:LoginInput): User!
-    createPost(body:String):Post!
+    register(registerInput:RegisterInput!): User!
+    login(loginInput:LoginInput!): User!
+    refreshToken(refreshToken: String!): String!
+    createPost(body:String!):Post!
     deletePost(postId:ID!):String!
     createComment(postId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!

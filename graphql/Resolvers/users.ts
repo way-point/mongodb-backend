@@ -13,7 +13,7 @@ import {
 } from "../../Utils/validators";
 import { JWT_ACCESS_TOKEN_SECRET } from "../../config";
 
-const generateToken = (user) => {
+const generateAccessToken = (user) => {
   const token = sign(
     {
       sub: user._id,
@@ -29,7 +29,21 @@ const generateToken = (user) => {
   return token;
 };
 
-const getRefreshToken = () => randToken.uid(256);
+const generateRefreshToken = (user) => {
+  const token = sign(
+    {
+      sub: user._id,
+      email: user.email,
+    },
+    JWT_ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "1h",
+      algorithm: "HS256",
+    }
+  );
+
+  return token;
+};
 
 const UserResolver = {
   Mutation: {
@@ -61,12 +75,12 @@ const UserResolver = {
         throw new UserInputError("Wrong credentials", { errors });
       }
 
-      const access_token = generateToken(user);
+      const access_token = generateAccessToken(user);
       const decodedAccessToken = jwtDecode(access_token) as JwtPayload;
       const accessTokenExpiresAt = decodedAccessToken.exp;
-      const refresh_token = getRefreshToken();
+      const refresh_token = generateRefreshToken(user);
 
-      const storedRefreshToken = new Token({
+      const storedRefreshToken = await Token.findOne({
         user: user._id,
       });
       storedRefreshToken.refreshToken = refresh_token;
@@ -121,16 +135,19 @@ const UserResolver = {
 
       const res = await newUser.save();
 
-      const access_token = generateToken(res);
+      const access_token = generateAccessToken(res);
       const decodedToken = jwtDecode(access_token) as JwtPayload;
       const expiresAt = decodedToken.exp;
 
       let refresh_token = await Token.findOne({ user: res._id });
 
       if (refresh_token) {
-        refresh_token.refreshToken = getRefreshToken()
+        refresh_token.refreshToken = generateRefreshToken(res);
       } else {
-        const token = new Token({user: res._id, refreshToken: getRefreshToken()})
+        const token = new Token({
+          user: res._id,
+          refreshToken: generateRefreshToken(res),
+        });
         await token.save();
         refresh_token = token;
       }
@@ -144,6 +161,26 @@ const UserResolver = {
         username: res.username,
         createdAt: res.createdAt,
       };
+    },
+    refreshToken: async (parent, { refreshToken }, context) => {
+      try {
+        const currToken = await Token.findOne({ refreshToken });
+
+        if (!currToken) {
+          throw new Error("Invalid token");
+        }
+
+        const existingUser = await User.findOne({ _id: currToken.user._id });
+
+        if (!existingUser) {
+          throw new Error("Invalid token");
+        }
+
+        const token = generateAccessToken(existingUser);
+        return token;
+      } catch (err) {
+        throw new Error("Could not refresh token");
+      }
     },
   },
 };
