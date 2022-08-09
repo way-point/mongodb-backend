@@ -1,5 +1,4 @@
-import {gql} from "apollo-server";
-
+import { gql } from "apollo-server";
 
 const typeDefs = gql`
   type Comment {
@@ -44,17 +43,17 @@ const typeDefs = gql`
   }
   type Query {
     getPosts: [Post]
-    getPost(postId:ID!): Post
+    getPost(postId: ID!): Post
   }
   type Mutation {
-    register(registerInput:RegisterInput!): User!
-    login(loginInput:LoginInput!): User!
+    register(registerInput: RegisterInput!): User!
+    login(loginInput: LoginInput!): User!
     refreshToken(refreshToken: String!): String!
-    createPost(body:String!):Post!
-    deletePost(postId:ID!):String!
+    createPost(body: String!): Post!
+    deletePost(postId: ID!): String!
     createComment(postId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
-    likePost(postId: ID!): Post! 
+    likePost(postId: ID!): Post!
   }
 `;
 

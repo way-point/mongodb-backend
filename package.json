@@ -6,8 +6,9 @@
     "dev": "tsc-watch --onSuccess \"node lib/src/index.js\"",
     "start": "node lib/index.js",
     "deploy": "npm run build && gcloud app deploy",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx"
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "npx eslint . --fix --ext .js,.jsx,.ts,.tsx",
+    "prettier:write": "npx prettier --write ."
   },
   "main": "lib/index.js",
   "dependencies": {
