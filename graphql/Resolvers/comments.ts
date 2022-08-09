@@ -36,6 +36,7 @@ const CommentResolver = {
       const post = await Post.findById(postId);
 
       if (post) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const commentIndex = post.comments.findIndex((c: any) => c.id === commentId);
 
         if (commentIndex === -1) {

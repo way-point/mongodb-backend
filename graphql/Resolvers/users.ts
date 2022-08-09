@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { UserInputError } from "apollo-server";
@@ -56,14 +57,14 @@ const UserResolver = {
       });
 
       if (!user) {
-        errors.general = "User not found";
+        errors.username = "User not found";
         throw new UserInputError("User not found", { errors });
       }
 
       const match = await bcrypt.compare(password, user.password);
 
       if (!match) {
-        errors.general = "Wrong credentials";
+        errors.password = "Wrong credentials";
         throw new UserInputError("Wrong credentials", { errors });
       }
 

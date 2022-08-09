@@ -1,8 +1,6 @@
-import { gql } from "apollo-server";
 import { ApolloServer } from "apollo-server";
 import * as mongoose from "mongoose";
 
-import Post from "../models/Post";
 import { MONGO_URL } from "../config";
 import typeDefs from "../graphql/TypeDefs";
 import resolvers from "../graphql/Resolvers";
