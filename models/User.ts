@@ -5,7 +5,7 @@ const userSchema = new Schema({
     password: String,
     email: String,
     createdAt: String,
-})
+});
 
-const User = model("User", userSchema)
+const User = model("User", userSchema);
 export default User;

@@ -13,7 +13,7 @@ yarn dev
 
 ## Mutations
 
-* Api request that allows you to modify data.
+* Api request that allows you to modfy data.
 * Used in createPost, createComment, likePost, deleteComment, ... routes
 
 ## Queries

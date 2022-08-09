@@ -5,13 +5,17 @@
     "serve": "npm run build && node lib/src/index.js",
     "dev": "tsc-watch --onSuccess \"node lib/src/index.js\"",
     "start": "node lib/index.js",
-    "deploy": "npm run build && gcloud app deploy"
+    "deploy": "npm run build && gcloud app deploy",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx"
   },
   "main": "lib/index.js",
   "dependencies": {
     "apollo-server": "^3.10.0",
     "bcryptjs": "^2.4.3",
+    "eslint": "^8.21.0",
     "firebase-admin": "^11.0.1",
+    "global": "^4.4.0",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^8.5.1",
@@ -21,6 +25,8 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
     "nodeman": "^1.1.2",
     "tsc-watch": "^5.0.3",
     "tslint": "^6.1.3",
