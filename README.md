@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4d7501ce-c4ef-4641-bde5-927e69aac34b/deploy-status)](https://app.netlify.com/sites/symphonious-tanuki-a3f9ad/deploys)
+
 ## Intial Setup
 
 ```sh
