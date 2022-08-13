@@ -37,7 +37,7 @@ export const validateRegisterInput = ({
 
   return {
     errors,
-    valid: Object.keys(errors).length < 1,
+    valid: !errors.confirmPassword || !errors.email || !errors.password || !errors.username,
   };
 };
 

@@ -44,6 +44,17 @@ const generateRefreshToken = (user) => {
 };
 
 const UserResolver = {
+  Query: {
+    ifUserFound: async (parent, { username }, context, info) => {
+      const user = await User.findOne({
+        username
+      });
+      if (!user) {
+        return false;
+      }
+      return true;
+    },
+  },
   Mutation: {
     login: async (parent, { loginInput: { username, password } }, context, info) => {
       const { valid, errors } = validateLoginInput({ username, password });

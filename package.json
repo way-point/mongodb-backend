@@ -8,7 +8,8 @@
     "deploy": "npm run build && gcloud app deploy",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npx eslint . --fix --ext .js,.jsx,.ts,.tsx",
-    "prettier:write": "npx prettier --write ."
+    "prettier:write": "npx prettier --write .",
+    "doc": "npx spectaql doc.config.yml"
   },
   "main": "lib/index.js",
   "dependencies": {
