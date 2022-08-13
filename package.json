@@ -11,6 +11,11 @@
     "prettier:write": "npx prettier --write .",
     "doc": "npx spectaql doc.config.yml"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn doc && git add ."
+    }
+  },
   "main": "lib/index.js",
   "dependencies": {
     "apollo-server": "^3.10.0",
