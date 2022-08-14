@@ -52,6 +52,6 @@ export const validateLoginInput = ({ username, password }: LoginInputProps) => {
 
   return {
     errors,
-    valid: Object.keys(errors).length < 1,
+    valid: !errors.username || !errors.password,
   };
 };
