@@ -2,7 +2,6 @@ type RegisterInputProps = {
   username: string;
   email: string;
   password: string;
-  confirmPassword: string;
 };
 
 type LoginInputProps = {
@@ -15,7 +14,7 @@ export const validateRegisterInput = ({
   email,
   password,
 }: RegisterInputProps) => {
-  const errors: RegisterInputProps = { username: "", email: "", password: "", confirmPassword: "" };
+  const errors: RegisterInputProps = { username: "", email: "", password: "" };
   if (username.trim() === "") {
     errors.username = "Username must not be empty";
   }
@@ -31,10 +30,10 @@ export const validateRegisterInput = ({
   if (password === "") {
     errors.password = "Password must not empty";
   }
-  
+
   return {
     errors,
-    valid: !errors.confirmPassword || !errors.email || !errors.password || !errors.username,
+    valid: !errors.email || !errors.password || !errors.username,
   };
 };
 
