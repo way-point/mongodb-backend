@@ -102,7 +102,7 @@ const UserResolver = {
     },
     register: async (
       parent,
-      { registerInput: { username, email, password, confirmPassword } },
+      { registerInput: { username, email, password } },
       context,
       info
     ) => {
@@ -110,7 +110,6 @@ const UserResolver = {
         username,
         email,
         password,
-        confirmPassword,
       });
 
       if (!valid) {

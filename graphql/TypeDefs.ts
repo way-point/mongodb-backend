@@ -34,7 +34,6 @@ const typeDefs = gql`
   input RegisterInput {
     username: String!
     password: String!
-    confirmPassword: String!
     email: String!
   }
   input LoginInput {
