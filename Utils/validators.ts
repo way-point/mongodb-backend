@@ -14,7 +14,6 @@ export const validateRegisterInput = ({
   username,
   email,
   password,
-  confirmPassword,
 }: RegisterInputProps) => {
   const errors: RegisterInputProps = { username: "", email: "", password: "", confirmPassword: "" };
   if (username.trim() === "") {
@@ -31,10 +30,8 @@ export const validateRegisterInput = ({
   }
   if (password === "") {
     errors.password = "Password must not empty";
-  } else if (password !== confirmPassword) {
-    errors.confirmPassword = "Passwords must match";
   }
-
+  
   return {
     errors,
     valid: !errors.confirmPassword || !errors.email || !errors.password || !errors.username,
