@@ -1,16 +1,3 @@
-import { validate } from "graphql";
-
-type RegisterInputProps = {
-  username: string;
-  email: string;
-  password: string;
-};
-
-type LoginInputProps = {
-  username: string;
-  password: string;
-};
-
 type generalValidationProps = {
   username?: string;
   password?: string;
@@ -31,7 +18,7 @@ const known_keywords = {
     maxLength: 40,
     minLength: 8,
   }
-}
+};
 
 class generalValidation { 
   private known_keywords;
@@ -40,11 +27,11 @@ class generalValidation {
   }
 
   public validate_keywords(given_keywords: generalValidationProps) {
-    const errors: generalValidationProps = {}
-    var valid: boolean = true;
-    for (var key in given_keywords) {
-      let given_key = given_keywords[key]
-      let key_attributes = this.known_keywords[key];
+    const errors: generalValidationProps = {};
+    let valid = true;
+    for (const key in given_keywords) {
+      const given_key = given_keywords[key];
+      const key_attributes = this.known_keywords[key];
       if (given_key.trim() === "") {
         errors[key] = `${key} must not be empty`;
       }
@@ -72,7 +59,7 @@ class generalValidation {
     return {
       errors: errors,
       valid: valid
-    }
+    };
   }
 }
 
@@ -87,12 +74,12 @@ export const validateRegisterInput = ({
     username: username,
     email: email,
     password: password
-  })
-}
+  });
+};
 
-export const validateLoginInput = ({ username, password }: LoginInputProps) => {
+export const validateLoginInput = ({ username, password }: generalValidationProps) => {
   return validation.validate_keywords({
     username: username,
     password: password
-  })
-}
+  });
+};
