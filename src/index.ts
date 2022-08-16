@@ -4,16 +4,25 @@ import * as mongoose from "mongoose";
 import { MONGO_URL } from "../config";
 import typeDefs from "../graphql/TypeDefs";
 import resolvers from "../graphql/Resolvers";
+import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+
+const express = require('express');
+
 
 const PORT = process.env.port || 3000;
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => ({ req }),
-});
+async function startServer() {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    csrfPrevention: true,
+    cache: 'bounded',
+    plugins: [
+      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+    ],
+  })
 
-mongoose
+  mongoose
   .connect(MONGO_URL)
   .then(() => {
     console.log("MongoDB Connected");
@@ -25,3 +34,8 @@ mongoose
   .catch((err) => {
     console.error(err);
   });
+
+
+}
+
+startServer();
