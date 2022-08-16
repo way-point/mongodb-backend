@@ -35,6 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "nodeman": "^1.1.2",
+    "spectaql-dark-theme": "^1.0.1",
     "tsc-watch": "^5.0.3",
     "tslint": "^6.1.3",
     "typescript": "^4.7.4"
