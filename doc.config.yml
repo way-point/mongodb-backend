@@ -1,2 +1,4 @@
 introspection:
   url: "http://localhost:3000"
+spectaql:
+  themeDir: ./node_modules/spectaql-dark-theme/theme
