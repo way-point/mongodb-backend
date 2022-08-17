@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
-import { UserInputError } from "apollo-server";
+import { UserInputError } from "apollo-server-express";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import * as randToken from "rand-token";
 

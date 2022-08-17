@@ -1,4 +1,4 @@
-import { AuthenticationError } from "apollo-server";
+import { AuthenticationError } from "apollo-server-express";
 import { JwtPayload } from "jsonwebtoken";
 import Post from "../../models/Post";
 import checkAuth from "../../Utils/checkAuth";

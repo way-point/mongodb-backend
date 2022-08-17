@@ -1,4 +1,4 @@
-import { UserInputError, AuthenticationError } from "apollo-server";
+import { UserInputError, AuthenticationError } from "apollo-server-express";
 import { JwtPayload } from "jsonwebtoken";
 
 import Post from "../../models/Post";
