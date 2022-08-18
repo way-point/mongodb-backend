@@ -58,7 +58,10 @@ describe("demo", () => {
       variables: {"registerInput":{"username":"mallory003","password":"","email":"mallory@nextchart.com"}},
     });
 
-    console.log(aliceFields.errors);
+    expect(aliceFields.errors[0].message).toBe("Username is taken");
+    console.log(bobFields.errors[0]);
+    expect(bobFields.errors[0].message).toBe("Username is taken");
+    expect(malloryFields.errors[0].message).toBe("Username is taken");
   });
   it("Query existing user", async () => {
     const result = await server.executeOperation({
