@@ -1,32 +1,28 @@
-import startServer from '../src/index';
+import startServer from "../src/index";
 
-import request from 'supertest';
+import configJson from "./config.json";
+import queryJson from "./query.json";
 
-import configJson from './config.json';
-import queryJson from './query.json';
+import mongoose from "mongoose";
 
-import mongoose from 'mongoose';
-
-const axios = require('axios');
-
-const url = configJson.url
+const url = configJson.url;
 
 
-describe('demo', () => {
+describe("demo", () => {
   let server, url:string;
 
   beforeAll(async () => {
     ({server, url} = await startServer(3001));
-  })
+  });
 
   afterAll(async () => {
     await mongoose.disconnect();
     await server.stop();
-  })
+  });
   
   let aliceFields:object, bobFields:object, malloryFields:object;
 
-  it('Creating Alice, Bob, and Mallory', async () => {
+  it("Creating Alice, Bob, and Mallory", async () => {
     aliceFields = await server.executeOperation({
       query: queryJson.registerUser,
       variables: {"registerInput":{"username":"alice001","password":"alicepassword","email":"alice@nextchart.com"}},
@@ -43,7 +39,7 @@ describe('demo', () => {
     });
   });
 
-  it('Recreating Alice, Bob, Mallory w/ errors', async () => {
+  it("Recreating Alice, Bob, Mallory w/ errors", async () => {
     // Duplicate username
     const aliceFields = await server.executeOperation({
       query: queryJson.registerUser,
@@ -62,9 +58,9 @@ describe('demo', () => {
       variables: {"registerInput":{"username":"mallory003","password":"","email":"mallory@nextchart.com"}},
     });
 
-    console.log(aliceFields.errors)
-  })
-  it('Query existing user', async () => {
+    console.log(aliceFields.errors);
+  });
+  it("Query existing user", async () => {
     const result = await server.executeOperation({
       query: queryJson.fetchUser,
       variables: {"username":"CPTforever"},
@@ -74,4 +70,4 @@ describe('demo', () => {
   });
   
   
-})
+});

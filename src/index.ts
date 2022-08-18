@@ -9,8 +9,8 @@ import {
   ApolloServerPluginDrainHttpServer
 } from "apollo-server-core";
 
-import http = require('http');
-import express = require('express');
+import http = require("http");
+import express = require("express");
 
 const PORT = process.env.port || 3000;
 
@@ -29,7 +29,7 @@ async function startServer(PORT:string|number) {
     ],
   });
   
-  mongoose.connect(MONGO_URL)
+  mongoose.connect(MONGO_URL);
 
   await server.start();
   await server.applyMiddleware({ app });
@@ -42,4 +42,4 @@ if (require.main === module) {
   startServer(PORT);
 } 
 
-export default startServer
+export default startServer;
