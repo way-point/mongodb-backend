@@ -1,5 +1,5 @@
 import { ApolloServer } from "apollo-server-express";
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 
 import { MONGO_URL } from "../config";
 import typeDefs from "../graphql/TypeDefs";
@@ -14,11 +14,11 @@ import express = require('express');
 
 const PORT = process.env.port || 3000;
 
-async function startServer() {
+async function startServer(PORT:string|number) {
   const app = express();
   const httpServer = http.createServer(app);
 
-  const server = new ApolloServer({
+  const server = await new ApolloServer({
     typeDefs,
     resolvers,
     csrfPrevention: true,
@@ -29,20 +29,17 @@ async function startServer() {
     ],
   });
   
-  
-  mongoose
-    .connect(MONGO_URL)
-    .then(async () => {
-      await server.start();
-      server.applyMiddleware({ app });
-      await new Promise<void>(resolve => httpServer.listen({ port: PORT }, resolve));
-    })
-    .then(() => {
-      console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  mongoose.connect(MONGO_URL)
+
+  await server.start();
+  await server.applyMiddleware({ app });
+  await new Promise<void>(resolve => httpServer.listen({ port: PORT }, resolve));
+  const url = `http://localhost:${PORT}${server.graphqlPath}`;
+  return {server, url};
 }
 
-startServer();
+if (require.main === module) {
+  startServer(PORT);
+} 
+
+export default startServer

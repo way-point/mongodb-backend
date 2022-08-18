@@ -1,0 +1,4 @@
+{
+  "registerUser": "mutation Register($registerInput: RegisterInput!) {\n  register(registerInput: $registerInput) {\n    id\n    email\n    refresh_token\n    access_token\n    access_token_expires_at\n    createdAt\n    username\n  }\n}",
+  "fetchUser": "query ExampleQuery($username: String) {\n  ifUserFound(username: $username)\n}" 
+}
