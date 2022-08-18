@@ -9,7 +9,8 @@
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npx eslint . --fix --ext .js,.jsx,.ts,.tsx",
     "prettier:write": "npx prettier --write .",
-    "doc": "npx spectaql doc.config.yml"
+    "doc": "npx spectaql doc.config.yml",
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -18,6 +19,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "apollo-server-core": "^3.10.1",
     "bcryptjs": "^2.4.3",
     "eslint": "^8.21.0",
     "firebase-admin": "^11.0.1",
@@ -27,7 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "mongoose": "^6.5.1",
-    "rand-token": "^1.0.1"
+    "rand-token": "^1.0.1",
+    "supertest": "^6.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

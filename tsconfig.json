@@ -7,8 +7,11 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
-    "watch": false
+    "watch": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
   },
   "compileOnSave": true,
-  "include": ["src"]
+  "include": ["src"],
+  
 }
