@@ -6,7 +6,8 @@ import typeDefs from "../graphql/TypeDefs";
 import resolvers from "../graphql/Resolvers";
 import { 
   ApolloServerPluginLandingPageLocalDefault,
-  ApolloServerPluginDrainHttpServer
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageDisabled
 } from "apollo-server-core";
 
 import http = require("http");
@@ -26,10 +27,11 @@ async function startServer(PORT:string|number) {
     plugins: [
       ApolloServerPluginLandingPageLocalDefault({ embed: true }),
       ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageDisabled()
     ],
   });
   
-  mongoose.connect(MONGO_URL);
+  await mongoose.connect(MONGO_URL);
 
   await server.start();
   await server.applyMiddleware({ app });
@@ -39,7 +41,9 @@ async function startServer(PORT:string|number) {
 }
 
 if (require.main === module) {
-  startServer(PORT);
+  startServer(PORT).then(({server, url}) => {
+    console.log("🚀 server running on : " + url);
+  })
 } 
 
 export default startServer;
