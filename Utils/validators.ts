@@ -49,8 +49,8 @@ class generalValidation {
       else if (given_key.length > key_attributes.maxLength) {
         errors[key].lengthError = `${key} is greater than ${key_attributes.maxLength} characters`;
       }
-
-      if (errors[key] !== {}) {
+      
+      if (errors[key] === {}) {
         valid = false;
       }
     }
