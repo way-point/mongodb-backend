@@ -12,7 +12,7 @@ const known_keywords = {
   email: {
     maxLength: 266,
     minLength: 3, 
-    regex: /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/
+    regex: /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/,
   },
   password: {
     maxLength: 40,
@@ -76,7 +76,10 @@ export const validateRegisterInput = ({
   });
 };
 
-export const validateLoginInput = ({ username, password }: generalValidationProps) => {
+export const validateLoginInput = ({ 
+  username, 
+  password 
+}: generalValidationProps) => {
   return validation.validate_keywords({
     username: username,
     password: password

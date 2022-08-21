@@ -57,10 +57,10 @@ const UserResolver = {
   },
   Mutation: {
     login: async (parent, { loginInput: { username, password } }, context, info) => {
-      const { valid, errors } = validateLoginInput({ username, password });
+      const { valid, errors } = await validateLoginInput({ username, password });
 
       if (!valid) {
-        throw new UserInputError("Errors", { errors });
+        throw new UserInputError("Client input didn't follow validaiton", { errors });
       }
 
       const user = await User.findOne({
@@ -106,7 +106,7 @@ const UserResolver = {
       context,
       info
     ) => {
-      const { valid, errors } = validateRegisterInput({
+      const { valid, errors } = await validateRegisterInput({
         username,
         email,
         password,

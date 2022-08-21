@@ -39,30 +39,7 @@ describe("demo", () => {
     });
   });
 
-  it("Recreating Alice, Bob, Mallory w/ errors", async () => {
-    // Duplicate username
-    const aliceFields = await server.executeOperation({
-      query: queryJson.registerUser,
-      variables: {"registerInput":{"username":"alice001","password":"alicepassword","email":"alice@nextchart.com"}},
-    });
-
-    // Invalid email
-    const bobFields = await server.executeOperation({
-      query: queryJson.registerUser,
-      variables: {"registerInput":{"username":"bob002","password":"bobpassword","email":"com"}},
-    });
-
-    // Missing Password
-    const malloryFields = await server.executeOperation({
-      query: queryJson.registerUser,
-      variables: {"registerInput":{"username":"mallory003","password":"","email":"mallory@nextchart.com"}},
-    });
-
-    expect(aliceFields.errors[0].message).toBe("Username is taken");
-    console.log(bobFields.errors[0]);
-    expect(bobFields.errors[0].message).toBe("Username is taken");
-    expect(malloryFields.errors[0].message).toBe("Username is taken");
-  });
+  
   it("Query existing user", async () => {
     const result = await server.executeOperation({
       query: queryJson.fetchUser,

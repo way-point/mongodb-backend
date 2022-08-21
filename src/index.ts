@@ -31,7 +31,7 @@ async function startServer(PORT:string|number) {
     ],
   });
   
-  await mongoose.connect(MONGO_URL);
+  mongoose.connect(MONGO_URL);
 
   await server.start();
   await server.applyMiddleware({ app });
@@ -43,7 +43,7 @@ async function startServer(PORT:string|number) {
 if (require.main === module) {
   startServer(PORT).then(({server, url}) => {
     console.log("🚀 server running on : " + url);
-  })
+  });
 } 
 
 export default startServer;
