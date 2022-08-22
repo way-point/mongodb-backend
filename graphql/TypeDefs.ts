@@ -1,9 +1,14 @@
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import { gql } from "apollo-server-express";
+import descriptionDirective from "./directives";
+
+const { descriptionDirectiveTypeDefs, descriptionDirectiveTransformer } =
+  descriptionDirective("description");
 
 const typeDefs = gql`
   type Comment {
-    id: ID!
-    createdAt: String!
+    id: ID! @deprecated(reason: "example of id depreciated")
+    createdAt: String! @description(value: "createdAt description")
     username: String!
     body: String!
   }
@@ -57,4 +62,10 @@ const typeDefs = gql`
   }
 `;
 
-export default typeDefs;
+const schema = makeExecutableSchema({
+  typeDefs: [
+    descriptionDirectiveTypeDefs, typeDefs
+  ]
+});
+
+export default descriptionDirectiveTransformer(schema);
