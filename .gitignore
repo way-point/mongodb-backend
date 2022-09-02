@@ -1,6 +1,6 @@
 node_modules/
 lib/
 config.ts
-
+waypoint*.json
 # Local Netlify folder
 .netlify
