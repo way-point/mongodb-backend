@@ -5,7 +5,7 @@ import queryJson from "./query.json";
 
 import mongoose from "mongoose";
 
-import { uploadFile, uploadPrimary } from "../Utils/objectStorage";
+import { downloadFile, uploadFile, uploadPrimary, primaryBucket } from "../Utils/googleObjectStorageLib";
 
 const url = configJson.url;
 
@@ -22,7 +22,11 @@ describe("demo", () => {
   });
   
   it("Hi", async () => {
-    await uploadPrimary("Do stuff", "I'm stuff");
+    const data = await downloadFile(primaryBucket, "I'm stuff");
+    console.log(data)
+
+    expect(data).toBe(4)
+
   })
   
 });
