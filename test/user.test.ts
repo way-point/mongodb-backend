@@ -4,9 +4,8 @@ import configJson from "./config.json";
 import queryJson from "./query.json";
 
 import mongoose from "mongoose";
-
+ 
 const url = configJson.url;
-
 
 describe("demo", () => {
   let server, url:string;
@@ -48,6 +47,5 @@ describe("demo", () => {
     
     expect(result.data.ifUserFound).toBe(true);
   });
-  
   
 });
